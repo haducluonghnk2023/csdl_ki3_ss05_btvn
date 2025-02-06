@@ -21,7 +21,7 @@ CREATE TABLE Appointments (
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
     FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
 );
-CREATE TABLE MedicalRecords (
+CREATE TABLE Medical_records (
     RecordID INT PRIMARY KEY AUTO_INCREMENT,
     PatientID INT,
     DoctorID INT,
@@ -69,7 +69,7 @@ VALUES
     (9, 9, '2025-01-28 10:00:00', 'Da Dat');
 
 -- Insert dữ liệu vào bảng MedicalRecords (Hồ sơ y tế)
-INSERT INTO MedicalRecords (PatientID, DoctorID, Diagnosis, TreatmentPlan)
+INSERT INTO Medical_records (PatientID, DoctorID, Diagnosis, TreatmentPlan)
 VALUES
     (1, 2, 'Cam Cum', 'Nghi ngoi, uong nhieu nuoc, su dung paracetamol 500mg khi sot.'),
     (3, 1, 'Dau Dau Man Tinh', 'Kiem tra huyet ap dinh ky, giam cang thang, su dung thuoc giam dau khi can.'),
@@ -94,7 +94,7 @@ SELECT p.FullName AS PatientName,p.DateOfBirth,d.FullName AS DoctorName,d.Specia
 FROM Patients p
 JOIN Appointments a ON p.PatientID = a.PatientID
 JOIN Doctors d ON a.DoctorID = d.DoctorID
-JOIN MedicalRecords mr ON p.PatientID = mr.PatientID AND d.DoctorID = mr.DoctorID
+JOIN Medical_records mr ON p.PatientID = mr.PatientID AND d.DoctorID = mr.DoctorID
 WHERE a.AppointmentDate BETWEEN '2025-01-20' AND '2025-01-25'
 ORDER BY a.AppointmentDate ASC
 LIMIT 5;
@@ -108,6 +108,6 @@ SELECT
     DATEDIFF(a.AppointmentDate, p.DateOfBirth) AS DaysDifference
 FROM Patients p
 JOIN Appointments a ON p.PatientID = a.PatientID
-JOIN MedicalRecords mr ON p.PatientID = mr.PatientID
+JOIN Medical_records mr ON p.PatientID = mr.PatientID
 ORDER BY a.AppointmentDate ASC;
 
